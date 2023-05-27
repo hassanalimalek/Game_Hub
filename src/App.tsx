@@ -5,6 +5,7 @@ import GameGrid from './components/Game/GameGrid';
 import GenreList from './components/Genre/GenreList';
 import { useState } from 'react';
 import { IGenres } from './hooks/useGenres';
+import Sorting from './components/sorting';
 function App() {
   // const [selectedGenre, setSelectedGenre] = useState<IGenres | null>(null);
   const [gameQuery, setGameQuery] = useState<any>({
@@ -38,12 +39,8 @@ function App() {
       </Show>
 
       <GridItem area='main'>
-        <GameGrid
-          gameQuery={gameQuery}
-          selectPlatform={(platform) => {
-            setGameQuery({ ...gameQuery, platform });
-          }}
-        />
+        <Sorting gameQuery={gameQuery} setGameQuery={setGameQuery} />
+        <GameGrid gameQuery={gameQuery} />
       </GridItem>
     </Grid>
   );
