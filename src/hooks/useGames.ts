@@ -1,11 +1,13 @@
 import React, { useEffect, useState } from 'react';
 import apiClient from '../services/api-client';
 import { CanceledError } from 'axios';
+import { Platform } from '../components/PlatformListIcon';
 
 export interface IGames {
   id: string;
   name: string;
   background_image: string;
+  parent_platforms: { platform: Platform }[];
 }
 interface IFetchGamesResponse {
   count: string;
@@ -24,7 +26,6 @@ function useGames() {
     apiClient
       .get<IFetchGamesResponse>('/games')
       .then((res) => {
-        console.log('--', res.data.results);
         setGames(res.data.results);
       })
       .catch((err) => {
