@@ -1,5 +1,4 @@
 import {
-  Box,
   Button,
   HStack,
   Menu,
@@ -19,7 +18,7 @@ interface Props {
   };
   setGameQuery: (gameQuery: any) => void;
 }
-function Sorting({ gameQuery, setGameQuery }: Props) {
+function Filters({ gameQuery, setGameQuery }: Props) {
   const { data: platforms } = usePlatforms();
 
   const sortOrder = [
@@ -79,4 +78,4 @@ function Sorting({ gameQuery, setGameQuery }: Props) {
   );
 }
 
-export default Sorting;
+export default Filters;

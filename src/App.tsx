@@ -4,16 +4,14 @@ import Navbar from './components/Navbar';
 import GameGrid from './components/Game/GameGrid';
 import GenreList from './components/Genre/GenreList';
 import { useState } from 'react';
-import { IGenres } from './hooks/useGenres';
-import Sorting from './components/sorting';
+import Filters from './components/Filters';
 import GameHeading from './components/Game/GameHeading';
 function App() {
-  // const [selectedGenre, setSelectedGenre] = useState<IGenres | null>(null);
   const [gameQuery, setGameQuery] = useState<any>({
     genre: null,
     platform: null,
   });
-  console.log('gameQuery -->', gameQuery);
+
   return (
     <Grid
       templateAreas={{
@@ -45,7 +43,7 @@ function App() {
 
       <GridItem area='main' padding={10}>
         <GameHeading gameQuery={gameQuery} />
-        <Sorting gameQuery={gameQuery} setGameQuery={setGameQuery} />
+        <Filters gameQuery={gameQuery} setGameQuery={setGameQuery} />
         <GameGrid gameQuery={gameQuery} />
       </GridItem>
     </Grid>

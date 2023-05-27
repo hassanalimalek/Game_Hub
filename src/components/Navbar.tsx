@@ -4,7 +4,6 @@ import ThemeSwitch from './ThemeSwitch';
 import SearchInput from './SearchInput';
 
 function Navbar({ onSearchSubmit }: any) {
-  console.log('onSearchSubmit --', onSearchSubmit);
   return (
     <HStack padding='10px' gap={4}>
       <HStack padding={0}>

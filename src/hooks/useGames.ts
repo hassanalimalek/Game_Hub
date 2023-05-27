@@ -1,6 +1,5 @@
 import { Platform } from '../components/PlatformListIcon';
 import useData from './useData';
-import { IGenres } from './useGenres';
 
 export interface IGames {
   id: string;
