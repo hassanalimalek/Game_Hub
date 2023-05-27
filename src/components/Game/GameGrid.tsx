@@ -1,10 +1,10 @@
 import { Text } from '@chakra-ui/react';
-import useGames from '../hooks/useGames';
+import useGames from '../../hooks/useGames';
 import { SimpleGrid } from '@chakra-ui/react';
 import GameCard from './GameCard';
 import GameCardSkeleton from './GameCardSkeleton';
 function GameGrid() {
-  const { games, error, isLoading } = useGames();
+  const { data: games, error, isLoading } = useGames();
   return (
     <div>
       {error && <Text>{error}</Text>}
