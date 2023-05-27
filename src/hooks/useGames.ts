@@ -1,5 +1,6 @@
 import { Platform } from '../components/PlatformListIcon';
 import useData from './useData';
+import { IGenres } from './useGenres';
 
 export interface IGames {
   id: string;
@@ -9,6 +10,16 @@ export interface IGames {
   metacritic: number;
 }
 
-const useGames = () => useData<IGames>('/games');
+const useGames = (gameQuery: any) =>
+  useData<IGames>(
+    '/games',
+    {
+      params: {
+        genres: gameQuery.genre?.id,
+        platforms: gameQuery.platform?.id,
+      },
+    },
+    [gameQuery.genre?.id, gameQuery.platform?.id]
+  );
 
 export default useGames;
