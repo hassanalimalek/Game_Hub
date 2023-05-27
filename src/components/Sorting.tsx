@@ -43,6 +43,7 @@ function Sorting({ gameQuery, setGameQuery }: Props) {
             platforms.map((platform) => {
               return (
                 <MenuItem
+                  key={platform.id}
                   onClick={() => setGameQuery({ ...gameQuery, platform })}
                 >
                   {platform.name}
@@ -63,6 +64,7 @@ function Sorting({ gameQuery, setGameQuery }: Props) {
             sortOrder.map((sort) => {
               return (
                 <MenuItem
+                  key={sort.value}
                   onClick={() =>
                     setGameQuery({ ...gameQuery, sortOrder: sort })
                   }

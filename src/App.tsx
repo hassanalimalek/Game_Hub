@@ -25,7 +25,11 @@ function App() {
       }}
     >
       <GridItem area='nav'>
-        <Navbar />
+        <Navbar
+          onSearchSubmit={(value: string) => {
+            setGameQuery({ ...gameQuery, serachValue: value });
+          }}
+        />
       </GridItem>
       <Show above='lg'>
         <GridItem area='aside' padding='20px'>

@@ -23,7 +23,7 @@ function GenreList({ genreSelected, onGenreSelect }: Props) {
       {genres &&
         genres.map((genre) => {
           return (
-            <ListItem paddingY={2}>
+            <ListItem key={genre?.id} paddingY={2}>
               <HStack gap={1}>
                 <Image
                   rounded={'lg'}
