@@ -8,6 +8,7 @@ export interface IGames {
   name: string;
   background_image: string;
   parent_platforms: { platform: Platform }[];
+  metacritic: number;
 }
 interface IFetchGamesResponse {
   count: string;
@@ -23,21 +24,24 @@ function useGames() {
   console.log('games -->', games);
   useEffect(() => {
     const controller = new AbortController();
+    setIsLoading(true);
     apiClient
       .get<IFetchGamesResponse>('/games')
       .then((res) => {
         setGames(res.data.results);
+        setIsLoading(false);
       })
       .catch((err) => {
         if (err instanceof CanceledError) return;
         setError(err.message);
+        setIsLoading(false);
       });
 
     return () => {
       controller.abort();
     };
   }, []);
-  return { games, error };
+  return { games, error, isLoading };
 }
 
 export default useGames;
