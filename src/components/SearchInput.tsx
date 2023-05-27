@@ -9,7 +9,6 @@ function SearchInput({ onSearchSubmit }: any) {
       style={{ width: '100%' }}
       onSubmit={(e) => {
         e.preventDefault();
-        console.log(' ref --->', ref?.current?.value);
         onSearchSubmit(ref?.current?.value);
       }}
     >

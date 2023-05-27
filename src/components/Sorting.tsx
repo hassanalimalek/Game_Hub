@@ -32,7 +32,7 @@ function Sorting({ gameQuery, setGameQuery }: Props) {
   ];
 
   return (
-    <HStack gap={2} paddingX={10} paddingTop={6}>
+    <HStack gap={2} paddingY={5}>
       {/* Platform Selector */}
       <Menu>
         <MenuButton as={Button} rightIcon={<BsChevronDown />}>

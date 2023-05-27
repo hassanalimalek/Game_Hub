@@ -1,5 +1,13 @@
 import useGenres, { IGenres } from '../../hooks/useGenres';
-import { HStack, Image, List, ListItem, Spinner, Text } from '@chakra-ui/react';
+import {
+  HStack,
+  Heading,
+  Image,
+  List,
+  ListItem,
+  Spinner,
+  Text,
+} from '@chakra-ui/react';
 
 interface Props {
   genreSelected: IGenres | null;
@@ -10,6 +18,9 @@ function GenreList({ genreSelected, onGenreSelect }: Props) {
 
   return (
     <List>
+      <Heading size='lg' marginBottom={3}>
+        Genres
+      </Heading>
       {error && null}
       {isLoading && (
         <HStack
@@ -20,29 +31,33 @@ function GenreList({ genreSelected, onGenreSelect }: Props) {
           <Spinner />
         </HStack>
       )}
+
       {genres &&
         genres.map((genre) => {
           return (
-            <ListItem key={genre?.id} paddingY={2}>
-              <HStack gap={1}>
-                <Image
-                  rounded={'lg'}
-                  boxSize={'40px'}
-                  src={genre?.image_background}
-                ></Image>
-                <Text
-                  cursor={'pointer'}
-                  onClick={() => {
-                    onGenreSelect(genre);
-                  }}
-                  fontWeight={
-                    genreSelected?.id === genre?.id ? 'bold' : 'normal'
-                  }
-                >
-                  {genre.name}
-                </Text>
-              </HStack>
-            </ListItem>
+            <>
+              <ListItem key={genre?.id} paddingY={2}>
+                <HStack gap={1}>
+                  <Image
+                    objectFit={'cover'}
+                    rounded={'lg'}
+                    boxSize={'40px'}
+                    src={genre?.image_background}
+                  ></Image>
+                  <Text
+                    cursor={'pointer'}
+                    onClick={() => {
+                      onGenreSelect(genre);
+                    }}
+                    fontWeight={
+                      genreSelected?.id === genre?.id ? 'bold' : 'normal'
+                    }
+                  >
+                    {genre.name}
+                  </Text>
+                </HStack>
+              </ListItem>
+            </>
           );
         })}
     </List>

@@ -6,6 +6,7 @@ import GenreList from './components/Genre/GenreList';
 import { useState } from 'react';
 import { IGenres } from './hooks/useGenres';
 import Sorting from './components/sorting';
+import GameHeading from './components/Game/GameHeading';
 function App() {
   // const [selectedGenre, setSelectedGenre] = useState<IGenres | null>(null);
   const [gameQuery, setGameQuery] = useState<any>({
@@ -27,7 +28,7 @@ function App() {
       <GridItem area='nav'>
         <Navbar
           onSearchSubmit={(value: string) => {
-            setGameQuery({ ...gameQuery, serachValue: value });
+            setGameQuery({ ...gameQuery, searchValue: value });
           }}
         />
       </GridItem>
@@ -42,7 +43,8 @@ function App() {
         </GridItem>
       </Show>
 
-      <GridItem area='main'>
+      <GridItem area='main' padding={10}>
+        <GameHeading gameQuery={gameQuery} />
         <Sorting gameQuery={gameQuery} setGameQuery={setGameQuery} />
         <GameGrid gameQuery={gameQuery} />
       </GridItem>
