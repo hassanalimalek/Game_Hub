@@ -24,7 +24,7 @@ function GameGrid({ gameQuery }: Props) {
     );
   }
   if (error) {
-    return <Text>{error}</Text>;
+    return <Text>{error?.message}</Text>;
   }
   if (games.length === 0) {
     return (
@@ -38,7 +38,7 @@ function GameGrid({ gameQuery }: Props) {
   return (
     <Box>
       <SimpleGrid columns={{ sm: 1, md: 2, lg: 3, xl: 4 }} spacing={6}>
-        {games.map((game) => (
+        {games?.results?.map((game: any) => (
           <GameCard key={game.id} game={game} />
         ))}
       </SimpleGrid>

@@ -39,7 +39,7 @@ function Filters({ gameQuery, setGameQuery }: Props) {
         </MenuButton>
         <MenuList>
           {platforms &&
-            platforms.map((platform) => {
+            platforms?.results?.map((platform: any) => {
               return (
                 <MenuItem
                   key={platform.id}

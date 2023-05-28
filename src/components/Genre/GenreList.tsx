@@ -18,9 +18,7 @@ function GenreList({ genreSelected, onGenreSelect }: Props) {
 
   return (
     <List>
-      <Heading size='lg' marginBottom={3}>
-        Genres
-      </Heading>
+      <Heading as='h4'>Genres</Heading>
       {error && null}
       {isLoading && (
         <HStack
@@ -33,31 +31,29 @@ function GenreList({ genreSelected, onGenreSelect }: Props) {
       )}
 
       {genres &&
-        genres.map((genre) => {
+        genres?.results?.map((genre: any) => {
           return (
-            <>
-              <ListItem key={genre?.id} paddingY={2}>
-                <HStack gap={1}>
-                  <Image
-                    objectFit={'cover'}
-                    rounded={'lg'}
-                    boxSize={'40px'}
-                    src={genre?.image_background}
-                  ></Image>
-                  <Text
-                    cursor={'pointer'}
-                    onClick={() => {
-                      onGenreSelect(genre);
-                    }}
-                    fontWeight={
-                      genreSelected?.id === genre?.id ? 'bold' : 'normal'
-                    }
-                  >
-                    {genre.name}
-                  </Text>
-                </HStack>
-              </ListItem>
-            </>
+            <ListItem key={genre?.id} paddingY={2}>
+              <HStack gap={1}>
+                <Image
+                  objectFit={'cover'}
+                  rounded={'lg'}
+                  boxSize={'40px'}
+                  src={genre?.image_background}
+                ></Image>
+                <Text
+                  cursor={'pointer'}
+                  onClick={() => {
+                    onGenreSelect(genre);
+                  }}
+                  fontWeight={
+                    genreSelected?.id === genre?.id ? 'bold' : 'normal'
+                  }
+                >
+                  {genre.name}
+                </Text>
+              </HStack>
+            </ListItem>
           );
         })}
     </List>
