@@ -1,11 +1,11 @@
-import { Box, Button, Flex, Heading, Text } from '@chakra-ui/react';
+import { Box, Button, Flex, Heading, Spinner, Text } from '@chakra-ui/react';
 import useGames from '../../hooks/useGames';
 import { SimpleGrid } from '@chakra-ui/react';
 import GameCard from './GameCard';
 import GameCardSkeleton from './GameCardSkeleton';
 import { IGenres } from '../../hooks/useGenres';
 import { IPlatforms } from '../../hooks/usePlatform';
-
+import InfiniteScroll from 'react-infinite-scroll-component';
 interface Props {
   gameQuery: {
     genre: IGenres | null;
@@ -13,7 +13,13 @@ interface Props {
   };
 }
 function GameGrid({ gameQuery }: Props) {
-  const { data: games, error, isLoading, fetchNextPage } = useGames(gameQuery);
+  const {
+    data: games,
+    error,
+    isLoading,
+    fetchNextPage,
+    hasNextPage,
+  } = useGames(gameQuery);
   if (isLoading) {
     return (
       <SimpleGrid columns={{ sm: 1, md: 2, lg: 3, xl: 4 }} spacing={5}>
@@ -35,24 +41,35 @@ function GameGrid({ gameQuery }: Props) {
       </Flex>
     );
   }
+  const fetchedGamesCount = games.pages.reduce(
+    (total, currPage) => total + currPage.results.length,
+    0
+  );
   return (
     <Box>
-      <SimpleGrid columns={{ sm: 1, md: 2, lg: 3, xl: 4 }} spacing={6}>
-        {games?.pages?.map((page) => {
-          return page?.results?.map((game: any) => (
-            <GameCard key={game.id} game={game} />
-          ));
-        })}
-      </SimpleGrid>
-      <Button
-        cursor={'pointer'}
-        marginY={'6'}
-        onClick={() => {
-          fetchNextPage();
-        }}
+      <InfiniteScroll
+        dataLength={fetchedGamesCount} //This is important field to render the next data
+        next={fetchNextPage}
+        hasMore={hasNextPage as boolean}
+        loader={
+          <Flex alignItems='center' justifyContent={'center'} marginY={6}>
+            <Spinner />
+          </Flex>
+        }
+        endMessage={
+          <p style={{ textAlign: 'center' }}>
+            <b>Yay! You have seen it all</b>
+          </p>
+        }
       >
-        Load More
-      </Button>
+        <SimpleGrid columns={{ sm: 1, md: 2, lg: 3, xl: 4 }} spacing={6}>
+          {games?.pages?.map((page) => {
+            return page?.results?.map((game: any) => (
+              <GameCard key={game.id} game={game} />
+            ));
+          })}
+        </SimpleGrid>
+      </InfiniteScroll>
     </Box>
   );
 }
