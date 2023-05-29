@@ -1,4 +1,4 @@
-import { Box, Flex, Heading, Text } from '@chakra-ui/react';
+import { Box, Button, Flex, Heading, Text } from '@chakra-ui/react';
 import useGames from '../../hooks/useGames';
 import { SimpleGrid } from '@chakra-ui/react';
 import GameCard from './GameCard';
@@ -13,7 +13,7 @@ interface Props {
   };
 }
 function GameGrid({ gameQuery }: Props) {
-  const { data: games, error, isLoading } = useGames(gameQuery);
+  const { data: games, error, isLoading, fetchNextPage } = useGames(gameQuery);
   if (isLoading) {
     return (
       <SimpleGrid columns={{ sm: 1, md: 2, lg: 3, xl: 4 }} spacing={5}>
@@ -26,7 +26,7 @@ function GameGrid({ gameQuery }: Props) {
   if (error) {
     return <Text>{error?.message}</Text>;
   }
-  if (games.length === 0) {
+  if (games?.pages?.length === 0) {
     return (
       <Flex justifyContent={'center'} alignItems={'center'} height='50vh'>
         <Heading size={'lg'} textAlign={'center'}>
@@ -38,10 +38,21 @@ function GameGrid({ gameQuery }: Props) {
   return (
     <Box>
       <SimpleGrid columns={{ sm: 1, md: 2, lg: 3, xl: 4 }} spacing={6}>
-        {games?.results?.map((game: any) => (
-          <GameCard key={game.id} game={game} />
-        ))}
+        {games?.pages?.map((page) => {
+          return page?.results?.map((game: any) => (
+            <GameCard key={game.id} game={game} />
+          ));
+        })}
       </SimpleGrid>
+      <Button
+        cursor={'pointer'}
+        marginY={'6'}
+        onClick={() => {
+          fetchNextPage();
+        }}
+      >
+        Load More
+      </Button>
     </Box>
   );
 }

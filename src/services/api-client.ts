@@ -16,6 +16,8 @@ export class APIService {
 
   get = (config?: any) => {
     return apiClient.get(this.endpoint, config).then((res) => {
+      console.log('--->', config);
+      console.log('res--->', res);
       return res?.data || null;
     });
   };
