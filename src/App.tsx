@@ -11,6 +11,7 @@ function App() {
     genre: null,
     platform: null,
   });
+  console.log('gameQuery --->', gameQuery);
 
   return (
     <Grid
@@ -35,7 +36,7 @@ function App() {
           <GenreList
             genreSelected={gameQuery.genre}
             onGenreSelect={(genre) => {
-              setGameQuery({ ...gameQuery, genre });
+              setGameQuery({ ...gameQuery, genre: genre.id });
             }}
           />
         </GridItem>

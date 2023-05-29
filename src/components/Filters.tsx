@@ -9,6 +9,8 @@ import {
 import { BsChevronDown } from 'react-icons/bs';
 import usePlatforms, { IPlatforms } from '../hooks/usePlatform';
 import { IGenres } from '../hooks/useGenres';
+import GetQueryData from '../services/getQueryData';
+import { useCallback } from 'react';
 
 interface Props {
   gameQuery?: {
@@ -30,12 +32,22 @@ function Filters({ gameQuery, setGameQuery }: Props) {
     { value: '-rating', label: 'Average Rating' },
   ];
 
+  const platformResults = GetQueryData(['platforms']);
+
+  const getPlatform = useCallback(() => {
+    return platformResults?.find((platFormResult: any) => {
+      return platFormResult.id === gameQuery?.platform;
+    });
+  }, [gameQuery?.platform]);
+
+  const platform = getPlatform();
+
   return (
     <HStack gap={2} paddingY={5}>
       {/* Platform Selector */}
       <Menu>
         <MenuButton as={Button} rightIcon={<BsChevronDown />}>
-          {gameQuery?.platform ? gameQuery.platform?.name : 'Select Platform'}
+          {platform ? platform?.name : 'Select Platform'}
         </MenuButton>
         <MenuList>
           {platforms &&
@@ -43,7 +55,9 @@ function Filters({ gameQuery, setGameQuery }: Props) {
               return (
                 <MenuItem
                   key={platform.id}
-                  onClick={() => setGameQuery({ ...gameQuery, platform })}
+                  onClick={() =>
+                    setGameQuery({ ...gameQuery, platform: platform.id })
+                  }
                 >
                   {platform.name}
                 </MenuItem>
