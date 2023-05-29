@@ -1,19 +1,22 @@
 import { Box, Heading } from '@chakra-ui/react';
-import { useQueryClient } from '@tanstack/react-query';
 import { useCallback } from 'react';
-import GetQueryData from '../../services/getQueryData';
+import useGenres from '../../hooks/useGenres';
+import usePlatforms from '../../hooks/usePlatform';
 
 function GameHeading({ gameQuery }: any) {
-  const genreResults = GetQueryData(['genres']);
-  const platformResults = GetQueryData(['platforms']);
+  const { data: genreResults } = useGenres();
+  const { data: platformResults } = usePlatforms();
 
   const getGenre = useCallback(() => {
-    return genreResults?.find((platFormResult: any) => {
-      return platFormResult.id === gameQuery.genre;
-    });
+    return (
+      genreResults &&
+      genreResults?.results?.find((platFormResult: any) => {
+        return platFormResult.id === gameQuery.genre;
+      })
+    );
   }, [gameQuery?.genre]);
   const getPlatform = useCallback(() => {
-    return platformResults?.find((platFormResult: any) => {
+    return platformResults?.results?.find((platFormResult: any) => {
       return platFormResult.id === gameQuery.platform;
     });
   }, [gameQuery?.platform]);
