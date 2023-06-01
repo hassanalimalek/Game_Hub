@@ -1,4 +1,4 @@
-import useGenres, { IGenres } from '../../hooks/useGenres';
+import useGenres from '../../hooks/useGenres';
 import {
   HStack,
   Heading,

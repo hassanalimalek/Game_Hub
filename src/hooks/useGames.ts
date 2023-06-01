@@ -1,4 +1,4 @@
-import { useInfiniteQuery, useQuery } from '@tanstack/react-query';
+import { useInfiniteQuery } from '@tanstack/react-query';
 import { Platform } from '../components/PlatformListIcon';
 import { APIService } from '../services/api-client';
 

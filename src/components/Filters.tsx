@@ -7,19 +7,10 @@ import {
   MenuList,
 } from '@chakra-ui/react';
 import { BsChevronDown } from 'react-icons/bs';
-import usePlatforms, { IPlatforms } from '../hooks/usePlatform';
-import { IGenres } from '../hooks/useGenres';
+import usePlatforms from '../hooks/usePlatform';
 import { useCallback } from 'react';
 import useGameQueryStore from '../state-management/store/store';
 
-interface Props {
-  gameQuery?: {
-    genre: IGenres | null;
-    platform: IPlatforms | null;
-    sortOrder: any | null;
-  };
-  setGameQuery: (gameQuery: any) => void;
-}
 function Filters() {
   const { gameQuery, setPlatformId, setSortOrder } = useGameQueryStore();
   const { data: platforms } = usePlatforms();

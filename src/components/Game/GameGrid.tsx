@@ -1,18 +1,12 @@
-import { Box, Button, Flex, Heading, Spinner, Text } from '@chakra-ui/react';
+import { Box, Flex, Heading, Spinner, Text } from '@chakra-ui/react';
 import useGames from '../../hooks/useGames';
 import { SimpleGrid } from '@chakra-ui/react';
 import GameCard from './GameCard';
 import GameCardSkeleton from './GameCardSkeleton';
-import { IGenres } from '../../hooks/useGenres';
-import { IPlatforms } from '../../hooks/usePlatform';
+
 import InfiniteScroll from 'react-infinite-scroll-component';
 import useGameQueryStore from '../../state-management/store/store';
-interface Props {
-  gameQuery: {
-    genre: IGenres | null;
-    platform: IPlatforms | null;
-  };
-}
+
 function GameGrid() {
   const { gameQuery } = useGameQueryStore();
 
