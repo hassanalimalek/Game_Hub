@@ -6,13 +6,16 @@ import GameCardSkeleton from './GameCardSkeleton';
 import { IGenres } from '../../hooks/useGenres';
 import { IPlatforms } from '../../hooks/usePlatform';
 import InfiniteScroll from 'react-infinite-scroll-component';
+import useGameQueryStore from '../../state-management/store/store';
 interface Props {
   gameQuery: {
     genre: IGenres | null;
     platform: IPlatforms | null;
   };
 }
-function GameGrid({ gameQuery }: Props) {
+function GameGrid() {
+  const { gameQuery } = useGameQueryStore();
+
   const {
     data: games,
     error,

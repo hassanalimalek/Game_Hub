@@ -3,15 +3,11 @@ import { Grid, GridItem, Show } from '@chakra-ui/react';
 import Navbar from './components/Navbar';
 import GameGrid from './components/Game/GameGrid';
 import GenreList from './components/Genre/GenreList';
-import { useState } from 'react';
 import Filters from './components/Filters';
 import GameHeading from './components/Game/GameHeading';
+import useGameQueryStore from './state-management/store/store';
 function App() {
-  const [gameQuery, setGameQuery] = useState<any>({
-    genre: null,
-    platform: null,
-  });
-  console.log('gameQuery --->', gameQuery);
+  const { gameQuery } = useGameQueryStore();
 
   return (
     <Grid
@@ -25,27 +21,18 @@ function App() {
       }}
     >
       <GridItem area='nav'>
-        <Navbar
-          onSearchSubmit={(value: string) => {
-            setGameQuery({ ...gameQuery, searchValue: value });
-          }}
-        />
+        <Navbar />
       </GridItem>
       <Show above='lg'>
         <GridItem area='aside' padding='20px'>
-          <GenreList
-            genreSelected={gameQuery.genre}
-            onGenreSelect={(genre) => {
-              setGameQuery({ ...gameQuery, genre: genre.id });
-            }}
-          />
+          <GenreList />
         </GridItem>
       </Show>
 
       <GridItem area='main' padding={10}>
         <GameHeading gameQuery={gameQuery} />
-        <Filters gameQuery={gameQuery} setGameQuery={setGameQuery} />
-        <GameGrid gameQuery={gameQuery} />
+        <Filters />
+        <GameGrid />
       </GridItem>
     </Grid>
   );

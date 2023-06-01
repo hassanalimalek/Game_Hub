@@ -9,8 +9,8 @@ import {
 import { BsChevronDown } from 'react-icons/bs';
 import usePlatforms, { IPlatforms } from '../hooks/usePlatform';
 import { IGenres } from '../hooks/useGenres';
-import GetQueryData from '../services/getQueryData';
 import { useCallback } from 'react';
+import useGameQueryStore from '../state-management/store/store';
 
 interface Props {
   gameQuery?: {
@@ -20,7 +20,8 @@ interface Props {
   };
   setGameQuery: (gameQuery: any) => void;
 }
-function Filters({ gameQuery, setGameQuery }: Props) {
+function Filters() {
+  const { gameQuery, setPlatformId, setSortOrder } = useGameQueryStore();
   const { data: platforms } = usePlatforms();
 
   const sortOrder = [
@@ -32,15 +33,19 @@ function Filters({ gameQuery, setGameQuery }: Props) {
     { value: '-rating', label: 'Average Rating' },
   ];
 
-  const platformResults = GetQueryData(['platforms']);
-
   const getPlatform = useCallback(() => {
-    return platformResults?.find((platFormResult: any) => {
-      return platFormResult.id === gameQuery?.platform;
+    return platforms?.results?.find((platFormResult: any) => {
+      return platFormResult.id === gameQuery?.platformId;
     });
-  }, [gameQuery?.platform]);
+  }, [gameQuery?.platformId]);
+  const getSortBy = useCallback(() => {
+    return sortOrder?.find((platFormResult: any) => {
+      return platFormResult.value === gameQuery?.sortOrder;
+    });
+  }, [gameQuery?.sortOrder]);
 
   const platform = getPlatform();
+  const sortBy = getSortBy();
 
   return (
     <HStack gap={2} paddingY={5}>
@@ -55,9 +60,7 @@ function Filters({ gameQuery, setGameQuery }: Props) {
               return (
                 <MenuItem
                   key={platform.id}
-                  onClick={() =>
-                    setGameQuery({ ...gameQuery, platform: platform.id })
-                  }
+                  onClick={() => setPlatformId && setPlatformId(platform.id)}
                 >
                   {platform.name}
                 </MenuItem>
@@ -68,9 +71,7 @@ function Filters({ gameQuery, setGameQuery }: Props) {
       {/* Sorting */}
       <Menu>
         <MenuButton as={Button} rightIcon={<BsChevronDown />}>
-          {`Sort By : ${
-            gameQuery?.sortOrder ? gameQuery?.sortOrder?.label : 'Relevance'
-          }`}
+          {`Sort By : ${sortBy ? sortBy?.label : 'Relevance'}`}
         </MenuButton>
         <MenuList>
           {sortOrder &&
@@ -78,9 +79,7 @@ function Filters({ gameQuery, setGameQuery }: Props) {
               return (
                 <MenuItem
                   key={sort.value}
-                  onClick={() =>
-                    setGameQuery({ ...gameQuery, sortOrder: sort })
-                  }
+                  onClick={() => setSortOrder && setSortOrder(sort?.value)}
                 >
                   {sort.label}
                 </MenuItem>

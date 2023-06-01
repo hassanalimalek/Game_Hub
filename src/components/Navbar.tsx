@@ -2,8 +2,10 @@ import { HStack, Image, Show, Text } from '@chakra-ui/react';
 import NavLogo from '../assets/logo.webp';
 import ThemeSwitch from './ThemeSwitch';
 import SearchInput from './SearchInput';
+import useGameQueryStore from '../state-management/store/store';
 
-function Navbar({ onSearchSubmit }: any) {
+function Navbar() {
+  const { setSearchText } = useGameQueryStore();
   return (
     <HStack padding='10px' gap={4}>
       <HStack padding={0}>
@@ -18,7 +20,7 @@ function Navbar({ onSearchSubmit }: any) {
           </Text>
         </Show>
       </HStack>
-      <SearchInput onSearchSubmit={onSearchSubmit} />
+      <SearchInput onSearchSubmit={setSearchText} />
 
       <ThemeSwitch />
     </HStack>
