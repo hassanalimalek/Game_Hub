@@ -24,20 +24,9 @@ function GameDetailPage() {
   const params = useParams();
   const [detailVisible, setDetailVisible] = useState(false);
   const { data: game, error, isLoading } = useGame(params?.id);
-  const { data: gameTrailers, error: gameTrailerError } = useGameTrailers(
-    params?.id
-  );
-  const { data: gameScreenShots, error: gameScreenShotsError } =
-    useGameScreenshots(params?.id);
-  console.log('gameTrailers -->', gameTrailers);
-  console.log('gameScreenShots -->', gameScreenShots);
-  console.log('game -->', game);
-  console.log('gameTrailerError -->', gameTrailerError);
-  console.log(
-    'game.results[0]?.data?.max -->',
-    gameTrailers.results[0]?.data?.max
-  );
-  //   console.log('detailVisible -->', detailVisible);
+  const { data: gameTrailers } = useGameTrailers(params?.id);
+  const { data: gameScreenShots } = useGameScreenshots(params?.id);
+
   if (error) {
     <Text>{error?.message}</Text>;
   }
