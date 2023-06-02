@@ -1,16 +1,19 @@
 import {
   Box,
   Button,
-  Flex,
-  Grid,
   HStack,
   Heading,
+  Image,
   List,
   SimpleGrid,
   Spinner,
   Text,
 } from '@chakra-ui/react';
-import { useGame } from '../hooks/useGames';
+import {
+  useGame,
+  useGameScreenshots,
+  useGameTrailers,
+} from '../hooks/useGames';
 import { useParams } from 'react-router-dom';
 import { useState } from 'react';
 import GameAttributeSection from '../components/Game/GameAttributeSection';
@@ -20,10 +23,20 @@ function GameDetailPage() {
   const params = useParams();
   const [detailVisible, setDetailVisible] = useState(false);
   const { data: game, error, isLoading } = useGame(params?.id);
+  const { data: gameTrailers, error: gameTrailerError } = useGameTrailers(
+    params?.id
+  );
+  const { data: gameScreenShots, error: gameScreenShotsError } =
+    useGameScreenshots(params?.id);
+  console.log('gameTrailers -->', gameTrailers);
+  console.log('gameScreenShots -->', gameScreenShots);
   console.log('game -->', game);
-
-  console.log('error -->', error);
-  console.log('detailVisible -->', detailVisible);
+  console.log('gameTrailerError -->', gameTrailerError);
+  console.log(
+    'game.results[0]?.data?.max -->',
+    gameTrailers.results[0]?.data?.max
+  );
+  //   console.log('detailVisible -->', detailVisible);
   if (error) {
     <Text>{error?.message}</Text>;
   }
@@ -42,7 +55,7 @@ function GameDetailPage() {
       </Heading>
       <Text fontSize={'lg'}>
         {!detailVisible
-          ? game?.description_raw.slice(0, 300) + '...'
+          ? game?.description_raw.slice(0, 400) + '...'
           : game?.description_raw}
         <Button
           onClick={() => setDetailVisible(!detailVisible)}
@@ -63,7 +76,7 @@ function GameDetailPage() {
             <List>
               {game.parent_platforms &&
                 game?.parent_platforms?.map((p: any) => {
-                  return <Text>{p?.platform?.name}</Text>;
+                  return <Text key={p?.platform?.id}>{p?.platform?.name}</Text>;
                 })}
             </List>
           }
@@ -78,7 +91,7 @@ function GameDetailPage() {
             <List>
               {game.genres &&
                 game?.genres?.map((genre: any) => {
-                  return <Text>{genre?.name}</Text>;
+                  return <Text key={genre?.name}>{genre?.name}</Text>;
                 })}
             </List>
           }
@@ -89,12 +102,23 @@ function GameDetailPage() {
             <List>
               {game.publishers &&
                 game?.publishers?.map((publisher: any) => {
-                  return <Text>{publisher?.name}</Text>;
+                  return <Text key={publisher?.name}>{publisher?.name}</Text>;
                 })}
             </List>
           }
         />
       </SimpleGrid>
+      {/* Game Screenshots */}
+      <SimpleGrid columns={{ base: 1, md: 2 }} spacing={2}>
+        {gameScreenShots.count &&
+          gameScreenShots.results.map((result: any) => {
+            return <Image key={result.id} src={result?.image} />;
+          })}
+      </SimpleGrid>
+      {/* Game Trailer */}
+      {gameTrailers.count && (
+        <video controls src={gameTrailers.results[0]?.data?.max}></video>
+      )}
     </Box>
   );
 }

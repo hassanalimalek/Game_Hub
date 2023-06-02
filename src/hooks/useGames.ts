@@ -42,4 +42,26 @@ export const useGame = (slug: any) =>
     },
   });
 
+export const useGameTrailers = (slug: any) => {
+  const apiTrailerClient = new APIService(`/games/${slug}/movies`);
+
+  return useQuery<any, Error>({
+    queryKey: ['game-trailers', slug],
+    queryFn: () => {
+      return apiTrailerClient.getAll(slug);
+    },
+  });
+};
+
+export const useGameScreenshots = (slug: any) => {
+  const apiTrailerClient = new APIService(`/games/${slug}/screenshots`);
+
+  return useQuery<any, Error>({
+    queryKey: ['game-screenshots', slug],
+    queryFn: () => {
+      return apiTrailerClient.getAll(slug);
+    },
+  });
+};
+
 export default useGames;
