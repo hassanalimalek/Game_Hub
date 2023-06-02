@@ -1,10 +1,10 @@
 <h1 align="center"> ![logo](https://github.com/hassanalimalek/Game_Hub/assets/69761391/efa935be-7c35-4d02-80aa-7fb13362c488)
  Welcome to Gamehub</h1>
  
- ![logo](https://github.com/hassanalimalek/Game_Hub/assets/69761391/cf74183d-5afa-4f32-b691-a8fc05fab44a)
+ ![logo](https://github.com/hassanalimalek/Game_Hub/assets/69761391/cf74183d-5afa-4f32-b691-a8fc05fab44a | 50)
 
 <p>
-  <img alt="Version" height="100" width="200" src="https://img.shields.io/badge/version-1-blue.svg?cacheSeconds=2592000" />
+  <img alt="Version"  src="https://img.shields.io/badge/version-1-blue.svg?cacheSeconds=2592000" />
 </p>
 
 > Gamehub is video game discovery platform and uses the RAWG api to access the comprehensive database of over 350,000 games across multiple platforms. 
