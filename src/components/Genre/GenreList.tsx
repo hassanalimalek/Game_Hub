@@ -9,6 +9,7 @@ import {
   Text,
 } from '@chakra-ui/react';
 import useGameQueryStore from '../../state-management/store/store';
+import getCroppedImage from '../../services/image-crop';
 
 function GenreList() {
   const { data: genres, error, isLoading } = useGenres();
@@ -38,7 +39,7 @@ function GenreList() {
                   objectFit={'cover'}
                   rounded={'lg'}
                   boxSize={'40px'}
-                  src={genre?.image_background}
+                  src={getCroppedImage(genre?.image_background) as string}
                 ></Image>
                 <Text
                   cursor={'pointer'}

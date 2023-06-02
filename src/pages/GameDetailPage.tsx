@@ -19,6 +19,7 @@ import { useParams } from 'react-router-dom';
 import { useState } from 'react';
 import GameAttributeSection from '../components/Game/GameAttributeSection';
 import CriticScore from '../components/Game/CriticScore';
+import getCroppedImage from '../services/image-crop';
 
 function GameDetailPage() {
   const params = useParams();
@@ -106,14 +107,19 @@ function GameDetailPage() {
         </GridItem>
         <GridItem>
           {/* Game Trailer */}
-          {gameTrailers.count && (
+          {gameTrailers.count ? (
             <video controls src={gameTrailers.results[0]?.data?.max}></video>
-          )}
+          ) : null}
           {/* Game Screenshots */}
           <SimpleGrid columns={{ base: 1, md: 2 }} spacing={2} marginTop={6}>
             {gameScreenShots.count &&
               gameScreenShots.results.map((result: any) => {
-                return <Image key={result.id} src={result?.image} />;
+                return (
+                  <Image
+                    key={result.id}
+                    src={getCroppedImage(result?.image) as string}
+                  />
+                );
               })}
           </SimpleGrid>
         </GridItem>
