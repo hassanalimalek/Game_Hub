@@ -11,7 +11,7 @@
 </p>
 
 Gamehub is video game discovery platform and uses the RAWG api to access the comprehensive database of over 350,000 games across multiple platforms. 
-> Users can
+Users can
  * Search for games via the search bar or can filter games based on genre or platform.
  * Toggle between light and dark mode.
  * View the detail of the game on the game detail page where they can view the game trailer and gameplay screenshots.
