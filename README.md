@@ -1,7 +1,7 @@
-<h1 align="center"> 
+<div align="center"> 
  <img src="https://github.com/hassanalimalek/Game_Hub/assets/69761391/cf74183d-5afa-4f32-b691-a8fc05fab44a.jpg" height="50px"/>
- Welcome to Gamehub
-</h1>
+ <h1> Welcome to Gamehub</h1>
+</div>
  
  
 
