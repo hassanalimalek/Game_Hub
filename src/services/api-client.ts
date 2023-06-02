@@ -14,8 +14,14 @@ export class APIService {
     this.endpoint = endpoint;
   }
 
-  get = (config?: any) => {
+  getAll = (config?: any) => {
     return apiClient.get(this.endpoint, config).then((res) => {
+      return res?.data || null;
+    });
+  };
+
+  get = (id?: any) => {
+    return apiClient.get(this.endpoint + '/' + id).then((res) => {
       return res?.data || null;
     });
   };

@@ -13,13 +13,13 @@ function GameHeading() {
     return (
       genreResults &&
       genreResults?.results?.find((platFormResult: any) => {
-        return platFormResult.id === gameQuery.genre;
+        return platFormResult.id === gameQuery.genreId;
       })
     );
   }, [gameQuery?.genreId]);
   const getPlatform = useCallback(() => {
     return platformResults?.results?.find((platFormResult: any) => {
-      return platFormResult.id === gameQuery.platform;
+      return platFormResult.id === gameQuery.platformId;
     });
   }, [gameQuery?.platformId]);
   const genre = getGenre();

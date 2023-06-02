@@ -3,6 +3,7 @@ import { IGames } from '../../hooks/useGames';
 import PlatformListIcon from '../PlatformListIcon';
 import CriticScore from './CriticScore';
 import getCroppedImage from '../../services/image-crop';
+import { Link } from 'react-router-dom';
 
 interface Props {
   game: IGames;
@@ -10,7 +11,12 @@ interface Props {
 
 function GameCard({ game }: Props) {
   return (
-    <Card overflow={'hidden'} rounded={'md'}>
+    <Card
+      transition='all .25s ease'
+      _hover={{ transform: 'scale(1.03)' }}
+      overflow='hidden'
+      border={10}
+    >
       <Image src={getCroppedImage(game?.background_image) as string}></Image>
       <CardBody>
         <Flex
@@ -24,7 +30,9 @@ function GameCard({ game }: Props) {
           />
           <CriticScore criticScore={game?.metacritic} />
         </Flex>
-        <Heading size={'md'}>{game?.name}</Heading>
+        <Link to={`/game/${game?.slug}`}>
+          <Heading size={'md'}>{game?.name}</Heading>
+        </Link>
       </CardBody>
     </Card>
   );

@@ -10,7 +10,7 @@ const usePlatforms = () => {
   return useQuery({
     queryKey: ['platforms'],
     queryFn: () => {
-      return apiClient.get();
+      return apiClient.getAll();
     },
     staleTime: 60 * 1000,
   });
