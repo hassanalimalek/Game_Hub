@@ -10,7 +10,7 @@
   <img alt="Version"  src="https://img.shields.io/badge/version-1-blue.svg?cacheSeconds=2592000" />
 </p>
 
-> Gamehub is video game discovery platform and uses the RAWG api to access the comprehensive database of over 350,000 games across multiple platforms. 
+Gamehub is video game discovery platform and uses the RAWG api to access the comprehensive database of over 350,000 games across multiple platforms. 
 > Users can
  * Search for games via the search bar or can filter games based on genre or platform.
  * Toggle between light and dark mode.
