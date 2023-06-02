@@ -1,5 +1,5 @@
 <div align="center"> 
- <img src="https://github.com/hassanalimalek/Game_Hub/assets/69761391/cf74183d-5afa-4f32-b691-a8fc05fab44a.jpg" height="50px"/>
+ <img src="https://github.com/hassanalimalek/Game_Hub/assets/69761391/cf74183d-5afa-4f32-b691-a8fc05fab44a.jpg" height="75px"/>
  <h1> Welcome to Gamehub</h1>
 </div>
  
